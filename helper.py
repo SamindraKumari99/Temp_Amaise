@@ -36,7 +36,8 @@ def closest(lst, K):
     return lst[min(range(len(lst)), key = lambda i: abs(lst[i]-K))]
 
 # the name of the saved model corresponding to the single-end version of AMAISE
-modelpath = 'models_and_references/single_end_model'
+# modelpath = 'models_and_references/single_end_model'
+# modelpath = 'models_and_references/model_new'
 
 '''
 Inputs:

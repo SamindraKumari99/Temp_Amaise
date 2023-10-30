@@ -31,13 +31,13 @@ torch.backends.cudnn.benchmark = False
 
 # Outputs to help user use AMAISE
 try:
-    opts, args = getopt.getopt(sys.argv[1:], 'i:t:o:')
+    opts, args = getopt.getopt(sys.argv[1:], 'i:t:o:m:')
 except getopt.GetoptError:
-    print('host_depletion.py -i <inputfile> -t <typefile> -o <outfolder>')
+    print('host_depletion.py -i <inputfile> -t <typefile> -o <outfolder> -m <model>')
     sys.exit(2)
 
-if len(opts) != 3:
-    print('host_depletion.py -i <inputfile> -t <typefile> -o <outfolder>')
+if len(opts) != 4:
+    print('host_depletion.py -i <inputfile> -t <typefile> -o <outfolder> -m <model>')
     sys.exit()
 
 '''
@@ -48,7 +48,7 @@ outfolder: folder to write output files to
 '''
 for opt, arg in opts:
     if opt == '-h':
-        print('host_depletion.py -i <inputfile> -t <typefile> -o <outfolder>')
+        print('host_depletion.py -i <inputfile> -t <typefile> -o <outfolder> -m <model>')
         sys.exit()
     elif opt in ("-i", "--inputfile"):
         testfile = arg
@@ -58,6 +58,8 @@ for opt, arg in opts:
             print('-t argument: fastq, fasta')
     elif opt in ("-o", "--outfolder"):
         outfolder = arg
+    elif opt in ("-m", "--model"):
+        modelpath = arg
             
 # Create temp_lenfiles folder
 if not os.path.exists('temp_lenfiles'):
