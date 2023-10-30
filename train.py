@@ -15,7 +15,7 @@ import sys, getopt
 # args = vars(ap.parse_args())
 
 try:
-    opts, args = getopt.getopt(sys.argv[1:], 'i:t:o:')
+    opts, args = getopt.getopt(sys.argv[1:], 'm:i:')
 except getopt.GetoptError:
     sys.exit(2)
     
@@ -37,10 +37,10 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # input = '/train_data/set1.csv'
 
-train_df = pd.read_csv(inputset)
+train_df = pd.read_csv(inputset).to_numpy()
 trainData = []
 for row in train_df:
-    trainData.append((generate_long_sequences(train_df['read']),train_df['class']))
+    trainData.append((generate_long_sequences(row[0]),row[1]))
 
 # initialize the train data loader
 trainDataLoader = DataLoader(trainData, shuffle=True, batch_size=BATCH_SIZE)

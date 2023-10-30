@@ -7,4 +7,4 @@ model = 'models_and_references/model_new'
 for training
 train.py -m <pathtosavemodel> -i <trainset>
 pathtosavemodel  = 'models_and_references/model_new'
-trainset = 'trainset/set1.csv'
+trainset = 'train_data/set1.csv'
