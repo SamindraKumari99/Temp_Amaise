@@ -42,7 +42,7 @@ train_df = pd.read_csv(labelset).to_numpy()
 trainData = []
 i = 0
 for seq in FastqGeneralIterator(open(inputset)):
-    trainData.append((generate_long_sequences(seq[1]), train_df[i][3]))
+    trainData.append((generate_long_sequences(seq[1]), train_df[i][4]))
     i = i + 1
 
 trainData = trainData[481701:491702]
