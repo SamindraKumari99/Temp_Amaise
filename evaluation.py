@@ -3,7 +3,7 @@ import sys, getopt
 import pandas as pd
 
 try:
-    opts, args = getopt.getopt(sys.argv[1:], 'f:t:p:')
+    opts, args = getopt.getopt(sys.argv[1:], 'o:t:p:')
 except getopt.GetoptError:
     sys.exit(2)
     
@@ -22,14 +22,18 @@ with open(predfile, 'r') as f:
       for line in f:
          preds.append(line.split(', ')[1])
          
+preds = preds[1:]
+preds = [int(x) for x in preds]
+print(preds[30])
+
 true = []
 true_df = pd.read_csv(truefile).to_numpy()
 for line in true_df:
-    true.append(line[4])
+    true.append(int(line[4]))
          
-preds = preds[:481701]
-true = true[:481701]
-
+preds = preds[:481701]+preds[491702:]
+true = true[:481701]+true[491702:]
+print(len(preds))
 accuracy = accuracy_score(true, preds)
 tn, fp, fn, tp = confusion_matrix(true, preds).ravel()
 sens =  tp/(tp + fn)
