@@ -36,11 +36,11 @@ model = nn.DataParallel(model)
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model.to(device)
 model.load_state_dict(torch.load(modelpath))
-model.fc = nn.Linear(model.fc.in_features, 2)
+model.module.fc = nn.Linear(model.module.fc.in_features, 2)
 
 for param in model.parameters():
     param.requires_grad = False
-model.fc.requires_grad = True
+model.module.fc.requires_grad = True
 ########## data loading
 
 train_df = pd.read_csv(labelset).to_numpy()
