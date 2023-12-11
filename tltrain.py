@@ -9,7 +9,7 @@ import time
 
 
 try:
-    opts, args = getopt.getopt(sys.argv[1:], 'm:i:l:n')
+    opts, args = getopt.getopt(sys.argv[1:], 'm:i:l:n:')
 except getopt.GetoptError:
     sys.exit(2)
     
@@ -35,7 +35,7 @@ model = nn.DataParallel(model)
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model.to(device)
-model.load_state_dict(torch.load(modelpath))
+model.load_state_dict(torch.load(modelpath, device))
 model.module.fc = nn.Linear(model.module.fc.in_features, 2)
 
 for param in model.parameters():
