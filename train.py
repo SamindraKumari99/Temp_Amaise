@@ -81,7 +81,7 @@ for e in range(0, EPOCHS):
     # for step, (x,y) in enumerate(trainDataLoader):
 	for (x, y) in trainDataLoader:
 		# send the input to the device
-		(x, y) = (torch.tensor(x).float().to(device), y.to(device))
+		(x, y) = (x.clone().detach().float().to(device), y.to(device))
 		# perform a forward pass and calculate the training loss
 		pred = torch.sigmoid(model(x))
 		loss = lossFn(pred, y)
