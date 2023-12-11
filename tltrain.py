@@ -40,7 +40,9 @@ model.module.fc = nn.Linear(model.module.fc.in_features, 2)
 
 for param in model.parameters():
     param.requires_grad = False
-model.module.fc.requires_grad = True
+for param in model.module.fc.parameters():
+    param.requires_grad = True   
+# model.module.fc.requires_grad = True
 ########## data loading
 
 train_df = pd.read_csv(labelset).to_numpy()
